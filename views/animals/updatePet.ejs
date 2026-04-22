@@ -1,0 +1,70 @@
+<div class="addpet-container">
+  <img src="/images/addpet.png" alt="">
+<form class="addpet-form" method="POST" action="/profile/<%= petFound._id %>/edit" enctype="multipart/form-data">
+    Pet Name:
+    <input type="text" name="petname" value="<%= petFound.petname%>"/>
+  </label>
+  <label>
+      Cat or Doggo?
+      <select name="petsort">
+          <option value="cat"
+              selected>cat</option>
+             <option value="dog" 
+              selected>Dogo</option>
+      </select>
+    </label>
+    <label>
+      Breed:
+      <input type="text" name="petbreed" value="<%= petFound.petbreed%>"/>
+    </label>
+    <label>
+      Pet birthday:
+      <input type="date" name="petbirth" value="<%= petFound.petname%>"/>
+    </label>
+    <label>
+      Pet gender:
+      <select name="petgender">
+          <option value="male" 
+              selected>Male</option>
+          <option value="female"
+              selected>Female</option>
+      </select>
+    </label>
+    <label>
+      Pet color:
+      <input type="text" name="petcolor" value="<%= petFound.petcolor%>"/>
+    </label>
+    <label>
+      Type of hair:
+      <select name="pethair">
+          <option value="long hair" 
+              selected>Long Hair</option>
+             <option value="medium hair"
+              selected>Medium Hair</option>
+             <option value="short hair" 
+              selected>Short Hair</option>
+             <option value="no hair" 
+              selected>No Hair</option>
+             <option value="wavy hair"
+              selected>Wavy Hair</option>
+             <option value="curly hair">Curly Hair</option>
+      </select>
+    </label>
+    <label>
+      Pet Vaccine:
+      <input type="text" name="petvaccines" value="<%= petFound.petvaccines%>"/>
+    </label>
+    <label>
+      Vaccine Date:
+      <input type="date" name="petvaccinesdate" value="<%= petFound.petvaccinesdate%>"/>
+    </label>
+    <label>Image:
+      <input type="file" name="petpicture" class="form-control-file" />
+    </label>
+    <label class="updatebtn">
+  <button type="submit">Update pet 🐶😺</button>
+</form>
+<div> 
+  <button><a href="/profile/mypets">Go back to My Pets</a></button>
+</div>
+</div>

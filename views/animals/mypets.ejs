@@ -1,0 +1,28 @@
+<h1 class="titlemypets">My Pets</h1>
+<% if (!mypets.length) { %> There is nothing in the DB <% } %> <% mypets.forEach(pet => { %>
+  <div class="mypetbox">
+<div style="border: 1px solid black; margin: 1rem; padding: 1rem; border-radius: 30px; border: rgba(0, 0, 0, 0); background-color: white;">
+  <h2 class="petinform">My name is <%=pet.petname%></h2>
+  <h2 class="petinform">I'm a <%=pet.petsort%></h2>
+  <h2 class="petinform">I'm a <%=pet.petbreed%></h2>
+  <h2 class="petinform">My birth is on the: <%=pet.petbirth%></h2>
+  <h2 class="petinform">My gender is: <%=pet.petgender%></h2>
+  <h2 class="petinform">My color is: <%=pet.petcolor%></h2>
+  <h2 class="petinform">My hair type is: <%=pet.pethair%></h2>
+  <h2 class="petinform">My next vaccine is: <%=pet.petvaccines%></h2>
+  <h2 class="petinform">and the date is: <%=pet.petvaccinesdate%></h2>
+</div>
+<div class="mypetsbtn">
+<form class="mypetsbtn2" method="GET" action="/profile/<%- pet._id %>/details">
+  <button class="mypetsbtn3" type="submit">Pet details</button>
+</form>
+<form class="mypetsbtn2" method="GET" action="/profile/<%- pet._id %>/edit">
+  <button class="mypetsbtn3" type="submit">Edit</button>
+</form>
+<form class="mypetsbtn2" method="POST" action="/profile/<%- pet._id %>/delete">
+  <button class="mypetsbtn3" type="submit">Delete</button>
+</form>
+</div>
+</div>
+<% }) %>
+

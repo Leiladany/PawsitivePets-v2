@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title><%= appTitle %></title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous" />
+  <link rel="stylesheet" href="/stylesheets/style.css" />
+</head>
+
+<body>
+  <nav class="navbar fixed-top navbar-expand-md">
+    <div class="container-fluid">
+      <a class="navbar-brand"
+        ><img
+          src="/images/logonew.png"
+          class="logonew"
+          alt="Logo"
+          width="130"
+          height="40"
+      /></a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="nav justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" aria-current="page" href="/">
+              <div class="navText">Home</div>
+            </a>
+          </li>
+          <% if (user) { %>
+            <li class="nav-item profile">
+              <a class="nav-link" href="/profile">Profile</a>
+            </li>
+          <% } else { %>
+            <li class="nav-item ml-auto">
+              <a class="nav-link" href="/auth/login">Login</a>
+            </li>
+          <% } %>
+          <% if (user) { %>
+            <span class="logoutPosition">
+              <form id="logout-form" action="/auth/logout" method="POST">
+                <button class="logoutbutton">Logout</button>
+              </form>
+            </span>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <%- body %>
+
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const logoutForm = document.getElementById('logout-form');
+
+      if (logoutForm) {
+        const logoutButton = logoutForm.querySelector('.logoutbutton');
+
+        const updateNavbar = (user) => {
+          const profileLink = document.querySelector('.nav-item.profile');
+
+          if (profileLink && logoutButton) {
+            if (user) {
+              profileLink.style.display = 'block';
+              logoutButton.style.display = 'block';
+            } else {
+              profileLink.style.display = 'none';
+              logoutButton.style.display = 'none';
+            }
+          }
+        };
+
+        const handleAuthenticationChange = () => {
+          updateNavbar(null);
+          localStorage.removeItem('user');
+          console.log('Authentication state changed');
+          window.location.href = '/';
+        };
+
+        if (logoutForm) {
+          logoutForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            console.log('Logout button clicked');
+            handleAuthenticationChange();
+          });
+        }
+
+        updateNavbar(<%- JSON.stringify(user) %>); // Pass the user information
+      }
+    });
+  </script>
+  <script src="/js/script.js"></script>
+</body>
+</html>
